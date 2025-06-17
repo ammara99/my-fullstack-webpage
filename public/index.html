@@ -3,37 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random Dog Image</title>
+  <title>Weather App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #weather-container {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to My Webpage!</h1>
-  <p>This webpage fetches a random dog image from an API and displays it here:</p>
+  <h1>Weather Information</h1>
+  <p>Enter a city name to get the weather information:</p>
 
-  <h2>Random Dog Image:</h2>
-  <div id="dog-container">
-    <p>Loading dog image...</p>
+  <input type="text" id="city" placeholder="Enter city" />
+  <button onclick="getWeather()">Get Weather</button>
+
+  <div id="weather-container">
+    <p id="loading-text">Loading...</p>
+    <p id="weather-info"></p>
   </div>
 
   <script>
-    // Fetch random dog image from the server
-    fetch('http://localhost:3000/random-dog')
-      .then(response => response.json())
-      .then(data => {
-        const dogContainer = document.getElementById('dog-container');
-        dogContainer.innerHTML = ''; // Clear the loading text
+    // Function to fetch weather data based on city input
+    function getWeather() {
+      const city = document.getElementById('city').value;
+      const weatherContainer = document.getElementById('weather-container');
+      const weatherInfo = document.getElementById('weather-info');
+      const loadingText = document.getElementById('loading-text');
 
-        // Create an image element and set the source to the random dog image
-        const dogImage = document.createElement('img');
-        dogImage.src = data.image;
-        dogImage.alt = 'Random Dog Image';
-        dogImage.style.maxWidth = '400px'; // Limit the size of the image
-        dogContainer.appendChild(dogImage);
-      })
-      .catch(error => {
-        const dogContainer = document.getElementById('dog-container');
-        dogContainer.innerHTML = '<p>Error fetching dog image.</p>';
-        console.error('Error:', error);
-      });
+      // Show loading text
+      loadingText.style.display = 'block';
+      weatherInfo.style.display = 'none';
+
+      // Fetch weather data from the server
+      fetch(`http://localhost:3000/weather?city=${city}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            loadingText.style.display = 'none';
+            weatherInfo.style.display = 'block';
+
+            const weather = data.data;
+            weatherInfo.innerHTML = `
+              <strong>City:</strong> ${weather.city}<br>
+              <strong>Temperature:</strong> ${weather.temperature}°C<br>
+              <strong>Description:</strong> ${weather.description}<br>
+              <strong>Humidity:</strong> ${weather.humidity}%<br>
+              <strong>Wind Speed:</strong> ${weather.windSpeed} m/s
+            `;
+          } else {
+            loadingText.style.display = 'none';
+            weatherInfo.innerHTML = 'Error fetching weather data.';
+          }
+        })
+        .catch(error => {
+          loadingText.style.display = 'none';
+          weatherInfo.innerHTML = 'Error fetching weather data.';
+          console.error('Error:', error);
+        });
+    }
   </script>
 </body>
 </html>
