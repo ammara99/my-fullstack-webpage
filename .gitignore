@@ -1,23 +1,2 @@
-# Node.js dependencies
 node_modules/
-
-# Logs
-*.log
-
-# Environment variables
 .env
-
-# Build output directories
-dist/
-build/
-
-# IDE files and project-specific settings
-.vscode/
-.idea/
-
-# Operating System files
-.DS_Store      # macOS
-Thumbs.db       # Windows
-
-# npm package-lock files (if you prefer to ignore it)
-package-lock.json
