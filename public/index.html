@@ -5,37 +5,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cat Facts</title>
   <style>
+    /* General Page Styling */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
       text-align: center;
-      padding: 20px;
+      color: #333;
     }
+
+    h1 {
+      font-size: 36px;
+      color: #4a90e2;
+      margin-top: 50px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    /* Button Styling */
+    .btn {
+      background: url('https://cdn2.thecatapi.com/images/5h3.jpg') no-repeat center center;
+      background-size: cover;
+      color: white;
+      font-size: 18px;
+      padding: 20px 40px;
+      border: none;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      animation: bounce 1.5s ease infinite;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      background-color: rgba(255, 99, 71, 0.7);
+    }
+
+    /* Animation for fading in the title */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Cat facts container */
     #facts {
-      margin-top: 20px;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #fff;
+      max-width: 500px;
+      margin: 20px auto;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      animation: slideIn 1s ease-in-out;
+    }
+
+    /* Animation for sliding in the facts */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Fun animation for the button */
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Styling for the cat fact text */
+    #facts p {
+      font-size: 20px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Responsive Design for smaller screens */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      .btn {
+        padding: 15px 30px;
+        font-size: 16px;
+      }
+
+      #facts {
+        padding: 15px;
+        margin: 10px;
+      }
     }
   </style>
 </head>
 <body>
   <h1>Welcome to the Cat Facts Page</h1>
-  <button onclick="fetchCatFacts()">Get Random Cat Fact</button>
+  <button class="btn" onclick="fetchCatFacts()">Get Random Cat Fact</button>
   <div id="facts"></div>
 
   <script>
     async function fetchCatFacts() {
-      // Fetch the random cat fact from the server
       const response = await fetch('/cat-facts');
-      
-      // Check if the response is successful
-      if (!response.ok) {
-        document.getElementById('facts').innerHTML = `<p>Sorry, we couldn't fetch the cat facts. Try again later.</p>`;
-        return;
-      }
-      
-      // Parse the JSON data
       const data = await response.json();
       
-      // Display the cat fact (assuming it has the 'fact' property)
-      document.getElementById('facts').innerHTML = `<p>${data.fact}</p>`;
+      // Check if the response contains data and display it
+      if (data && data.fact) {
+        document.getElementById('facts').innerHTML = `<p>${data.fact}</p>`;
+      } else {
+        document.getElementById('facts').innerHTML = `<p>Sorry, couldn't fetch the cat fact. Please try again later.</p>`;
+      }
     }
   </script>
 </body>
