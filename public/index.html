@@ -1,4 +1,3 @@
-<!-- public/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,10 +22,20 @@
 
   <script>
     async function fetchCatFacts() {
+      // Fetch the random cat fact from the server
       const response = await fetch('/cat-facts');
+      
+      // Check if the response is successful
+      if (!response.ok) {
+        document.getElementById('facts').innerHTML = `<p>Sorry, we couldn't fetch the cat facts. Try again later.</p>`;
+        return;
+      }
+      
+      // Parse the JSON data
       const data = await response.json();
-      const randomFact = data[Math.floor(Math.random() * data.length)];
-      document.getElementById('facts').innerHTML = `<p>${randomFact.text}</p>`;
+      
+      // Display the cat fact (assuming it has the 'fact' property)
+      document.getElementById('facts').innerHTML = `<p>${data.fact}</p>`;
     }
   </script>
 </body>
