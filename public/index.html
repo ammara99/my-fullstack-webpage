@@ -1,39 +1,33 @@
+<!-- public/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random Dog Image</title>
+  <title>Cat Facts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    #facts {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to My Webpage!</h1>
-  <p>This webpage fetches a random dog image from an API and displays it here:</p>
-
-  <h2>Random Dog Image:</h2>
-  <div id="dog-container">
-    <p>Loading dog image...</p>
-  </div>
+  <h1>Welcome to the Cat Facts Page</h1>
+  <button onclick="fetchCatFacts()">Get Random Cat Fact</button>
+  <div id="facts"></div>
 
   <script>
-    // Fetch random dog image from the server
-    fetch('http://localhost:3000/random-dog')
-      .then(response => response.json())
-      .then(data => {
-        const dogContainer = document.getElementById('dog-container');
-        dogContainer.innerHTML = ''; // Clear the loading text
-
-        // Create an image element and set the source to the random dog image
-        const dogImage = document.createElement('img');
-        dogImage.src = data.image;
-        dogImage.alt = 'Random Dog Image';
-        dogImage.style.maxWidth = '400px'; // Limit the size of the image
-        dogContainer.appendChild(dogImage);
-      })
-      .catch(error => {
-        const dogContainer = document.getElementById('dog-container');
-        dogContainer.innerHTML = '<p>Error fetching dog image.</p>';
-        console.error('Error:', error);
-      });
+    async function fetchCatFacts() {
+      const response = await fetch('/cat-facts');
+      const data = await response.json();
+      const randomFact = data[Math.floor(Math.random() * data.length)];
+      document.getElementById('facts').innerHTML = `<p>${randomFact.text}</p>`;
+    }
   </script>
 </body>
 </html>
