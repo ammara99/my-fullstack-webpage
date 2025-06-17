@@ -1,17 +1,20 @@
 const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-
+const axios = require('axios');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-app.use(cors());
-app.use(express.static('public'));  // Serve static files (HTML, CSS, JS)
-
-app.get('/data', (req, res) => {
-  res.json({ message: 'Hello from Node.js Backend!' });
+// Endpoint to fetch all countries
+app.get('/countries', async (req, res) => {
+  try {
+    // Fetching country data from REST Countries API
+    const response = await axios.get('https://restcountries.com/v3.1/all');
+    res.json(response.data); // Send the data as JSON response
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).json({ error: 'Failed to fetch country data' });
+  }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
 });
