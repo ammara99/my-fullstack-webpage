@@ -28,7 +28,9 @@
 
     /* Button Styling */
     .btn {
-      background-color: #ff6347; /* Tomato red background */
+      background-image: url('https://cdn2.thecatapi.com/images/5h3.jpg'); /* Cat image background */
+      background-position: center;
+      background-size: cover;
       color: white;
       font-size: 18px;
       padding: 20px 40px;
@@ -38,15 +40,11 @@
       transition: transform 0.3s ease, background-color 0.3s ease;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       animation: bounce 1.5s ease infinite;
-      background-image: url('https://cdn2.thecatapi.com/images/5h3.jpg');
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
     }
 
     .btn:hover {
       transform: scale(1.1);
-      background-color: #ff4500; /* Darker red on hover */
+      background-color: rgba(255, 99, 71, 0.7); /* Slightly transparent red on hover */
     }
 
     /* Animation for fading in the title */
@@ -121,7 +119,6 @@
         margin: 10px;
       }
     }
-
   </style>
 </head>
 <body>
@@ -134,7 +131,7 @@
       const response = await fetch('/cat-facts');
       const data = await response.json();
       
-      // Check if the response contains data and display it
+      // Display the cat fact
       if (data && data.fact) {
         document.getElementById('facts').innerHTML = `<p><strong>Did you know?</strong> ${data.fact}</p>`;
       } else {
