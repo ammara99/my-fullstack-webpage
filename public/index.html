@@ -17,6 +17,10 @@
       background-position: center;
       background-size: cover; /* Make sure the image covers the whole background */
       background-attachment: fixed; /* Fixed background image when scrolling */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
     }
 
     /* Add a semi-transparent overlay to the background */
@@ -35,7 +39,7 @@
     h1 {
       font-size: 48px;
       color: #ff6347; /* Tomato red */
-      margin-top: 20px; /* Reduced space from top */
+      margin-top: 20px;
       font-weight: bold;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for better contrast */
       animation: fadeIn 2s ease-in-out;
@@ -59,7 +63,6 @@
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     }
 
-    /* Button hover effect */
     .btn:hover {
       transform: scale(1.1);
       background-color: #ff4500; /* Darker red on hover */
