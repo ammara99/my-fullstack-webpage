@@ -1,27 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Country Data</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Webpage</title>
 </head>
 <body>
-    <h1>Country Data</h1>
-    <div id="countries"></div>
-
-    <script>
-        // Fetch data from the backend API
-        fetch('http://localhost:3000/countries')
-            .then(response => response.json())
-            .then(data => {
-                let countriesList = '';
-                data.forEach(country => {
-                    countriesList += `<p>${country.name.common}</p>`;
-                });
-                document.getElementById('countries').innerHTML = countriesList;
-            })
-            .catch(error => console.log('Error:', error));
-    </script>
+  <h1>Welcome to My Webpage!</h1>
+  <p>This is a webpage served by Node.js on Render.</p>
 </body>
 </html>
-
