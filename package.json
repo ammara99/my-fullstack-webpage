@@ -1,23 +1,22 @@
 {
-  "name": "my-weather-app",
+  "name": "my-fullstack-webpage",
   "version": "1.0.0",
-  "description": "A simple weather app that fetches data from OpenWeather API.",
+  "description": "A simple full-stack webpage",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",  // Start the server
-    "dev": "nodemon server.js"  // Optional: For development with live reloading (use `npm install nodemon` if you want this)
+    "start": "node server.js",  // This will start the app in production
+    "build": "yarn install"     // This will install dependencies using Yarn
   },
   "dependencies": {
-    "axios": "^0.24.0",         // HTTP client to make requests to OpenWeather API
-    "express": "^4.17.1",       // Web framework to create the server
-    "dotenv": "^10.0.0"         // To securely load environment variables
+    "axios": "^0.24.0",         // For making API calls
+    "express": "^4.17.1",       // Web framework for Node.js
+    "dotenv": "^10.0.0"         // To load environment variables from .env file
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"         // Optional for development environment, allows auto-reloading of the server
+    "nodemon": "^2.0.15"         // For automatic server reload in development
   },
   "engines": {
-    "node": ">=14.0.0"  // Make sure you're using at least Node.js 14
+    "node": ">=14.0.0"           // Ensure Node.js version compatibility
   },
-  "author": "Your Name",
   "license": "ISC"
 }
