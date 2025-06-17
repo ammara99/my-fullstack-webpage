@@ -1,68 +1,32 @@
+<!-- public/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather App</title>
+  <title>Cat Facts</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
     }
-    #weather-container {
+    #facts {
       margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>Weather Information</h1>
-  <p>Enter a city name to get the weather information:</p>
-
-  <input type="text" id="city" placeholder="Enter city" />
-  <button onclick="getWeather()">Get Weather</button>
-
-  <div id="weather-container">
-    <p id="loading-text">Loading...</p>
-    <p id="weather-info"></p>
-  </div>
+  <h1>Welcome to the Cat Facts Page</h1>
+  <button onclick="fetchCatFacts()">Get Random Cat Fact</button>
+  <div id="facts"></div>
 
   <script>
-    // Function to fetch weather data based on city input
-    function getWeather() {
-      const city = document.getElementById('city').value;
-      const weatherContainer = document.getElementById('weather-container');
-      const weatherInfo = document.getElementById('weather-info');
-      const loadingText = document.getElementById('loading-text');
-
-      // Show loading text
-      loadingText.style.display = 'block';
-      weatherInfo.style.display = 'none';
-
-      // Fetch weather data from the server
-      fetch(`http://localhost:3000/weather?city=${city}`)
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === 'success') {
-            loadingText.style.display = 'none';
-            weatherInfo.style.display = 'block';
-
-            const weather = data.data;
-            weatherInfo.innerHTML = `
-              <strong>City:</strong> ${weather.city}<br>
-              <strong>Temperature:</strong> ${weather.temperature}°C<br>
-              <strong>Description:</strong> ${weather.description}<br>
-              <strong>Humidity:</strong> ${weather.humidity}%<br>
-              <strong>Wind Speed:</strong> ${weather.windSpeed} m/s
-            `;
-          } else {
-            loadingText.style.display = 'none';
-            weatherInfo.innerHTML = 'Error fetching weather data.';
-          }
-        })
-        .catch(error => {
-          loadingText.style.display = 'none';
-          weatherInfo.innerHTML = 'Error fetching weather data.';
-          console.error('Error:', error);
-        });
+    async function fetchCatFacts() {
+      const response = await fetch('/cat-facts');
+      const data = await response.json();
+      const randomFact = data[Math.floor(Math.random() * data.length)];
+      document.getElementById('facts').innerHTML = `<p>${randomFact.text}</p>`;
     }
   </script>
 </body>
