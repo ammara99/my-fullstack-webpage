@@ -1,23 +1,22 @@
 const express = require('express');
 const axios = require('axios');
-require('dotenv').config(); // Load environment variables from .env
+require('dotenv').config(); // Load environment variables from .env file
 const app = express();
-const port = process.env.PORT || 3000; // Use PORT from .env file or default to 3000
+const port = process.env.PORT || 3000; // Use the PORT environment variable from Render, or fallback to 3000 locally
 
 // Middleware to parse JSON data from the body of the request
-app.use(express.json()); // For parsing application/json
-app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // POST route to handle data
 app.get('/random-dog', async (req, res) => {
   try {
-    // Fetch a random dog image from The Dog API using API_URL from .env
+    // Fetch data from the external API using the API_URL from the environment variables
     const response = await axios.get(process.env.API_URL);
     
-    // Send the dog image URL back to the client
     res.json({
       status: 'success',
-      image: response.data.message
+      image: response.data.message // Response from Dog API (dog image URL)
     });
   } catch (error) {
     res.status(500).json({
@@ -27,7 +26,7 @@ app.get('/random-dog', async (req, res) => {
   }
 });
 
-// Start the server
+// Start the server on the given port
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
