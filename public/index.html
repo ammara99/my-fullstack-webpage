@@ -16,7 +16,7 @@
       background-image: url('https://cdn2.thecatapi.com/images/5h3.jpg'); /* Beautiful cat image */
       background-position: center;
       background-size: cover; /* Make sure the image covers the whole background */
-      background-attachment: fixed; /* Keep the background fixed */
+      background-attachment: fixed; /* Fixed background image when scrolling */
     }
 
     /* Add a semi-transparent overlay to the background */
@@ -35,7 +35,7 @@
     h1 {
       font-size: 48px;
       color: #ff6347; /* Tomato red */
-      margin-top: 60px;
+      margin-top: 20px; /* Reduced space from top */
       font-weight: bold;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for better contrast */
       animation: fadeIn 2s ease-in-out;
@@ -43,25 +43,23 @@
 
     /* Button Styling */
     .btn {
-      background-color: #ff6347; /* Tomato red background */
+      background: linear-gradient(145deg, #ff6347, #ff4500); /* Gradient background */
       color: white;
       font-size: 20px;
-      padding: 20px 40px;
+      padding: 15px 30px;
       border: none;
       cursor: pointer;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      border-radius: 50px; /* Rounded corners */
       transition: transform 0.3s ease, background-color 0.3s ease;
       display: inline-block;
       margin-top: 20px;
       text-decoration: none;
       font-weight: bold;
       position: relative;
-      background-image: url('https://cdn2.thecatapi.com/images/5h3.jpg'); /* Add cat image */
-      background-position: center;
-      background-size: cover;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     }
 
+    /* Button hover effect */
     .btn:hover {
       transform: scale(1.1);
       background-color: #ff4500; /* Darker red on hover */
@@ -73,7 +71,7 @@
       top: 10px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 28px;
+      font-size: 30px;
     }
 
     /* Animation for fading in the title */
